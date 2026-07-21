@@ -249,7 +249,7 @@ def seller_products_page(seller: dict) -> None:
 def login_page() -> None:
     st.markdown("<div class='login-page-spacer'></div>", unsafe_allow_html=True)
 
-    left, right = st.columns([1.18, 0.88], gap="small", vertical_alignment="stretch")
+    left, right = st.columns([1.18, 0.88], gap="small", vertical_alignment="top")
 
     with left:
         html_block(
