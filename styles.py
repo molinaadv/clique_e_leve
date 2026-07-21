@@ -652,6 +652,83 @@ div[data-testid="stForm"]{
   }
 }
 
+
+/* =========================================================
+   V11 — SELECT VISÍVEL + MENU COM BOTÕES REAIS
+   ========================================================= */
+
+/* Remove o título duplicado criado pelo radio antigo */
+[data-testid="stSidebar"] .stRadio{
+  display:none!important;
+}
+
+/* Visualizar como: fundo escuro e texto branco */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div{
+  background:#12395d!important;
+  border:1px solid rgba(67,210,255,.45)!important;
+  border-radius:11px!important;
+  min-height:44px!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] *,
+[data-testid="stSidebar"] div[data-baseweb="select"] span,
+[data-testid="stSidebar"] div[data-baseweb="select"] div,
+[data-testid="stSidebar"] div[data-baseweb="select"] input{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  opacity:1!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] svg{
+  color:#ffffff!important;
+  fill:#ffffff!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] > div:hover{
+  background:#17466f!important;
+  border-color:#2bd8ff!important;
+}
+
+/* Menu com botões de verdade */
+.nav-button-wrap{
+  margin:3px 0!important;
+}
+.nav-button-wrap div.stButton > button{
+  width:100%!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  background:transparent!important;
+  color:#ffffff!important;
+  border:0!important;
+  border-left:3px solid transparent!important;
+  border-radius:12px!important;
+  min-height:44px!important;
+  padding:0 13px!important;
+  font-weight:750!important;
+  box-shadow:none!important;
+}
+.nav-button-wrap div.stButton > button:hover{
+  background:rgba(255,255,255,.07)!important;
+  color:#ffffff!important;
+  border-left-color:rgba(43,216,255,.40)!important;
+}
+.nav-button-wrap.active div.stButton > button{
+  background:#0d4669!important;
+  color:#ffffff!important;
+  border-left-color:#29d8ff!important;
+}
+.nav-button-wrap.active div.stButton > button:hover{
+  background:#115277!important;
+}
+
+/* Garante que o botão sair não herde o estilo do menu */
+[data-testid="stSidebar"] > div div.stButton > button{
+  color:#ffffff!important;
+}
+.sidebar-profile + div.stButton > button{
+  background:transparent!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  justify-content:center!important;
+}
+
 </style>
         """,
         unsafe_allow_html=True,

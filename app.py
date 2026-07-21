@@ -343,39 +343,54 @@ def main() -> None:
         html_block('<div class="nav-caption">Navegação</div>')
 
         if preview == "administrador":
-            options = [
-                "⌂  Início",
-                "▦  Marketplace",
-                "◎  Parceiros",
-                "▣  Produtos",
-                "◉  Clientes",
-                "◉  Financeiro",
-                "◉  Auditoria",
+            menu_items = [
+                ("⌂", "Início"),
+                ("▦", "Marketplace"),
+                ("◎", "Parceiros"),
+                ("▣", "Produtos"),
+                ("◉", "Clientes"),
+                ("◉", "Financeiro"),
+                ("◉", "Auditoria"),
             ]
         elif preview == "vendedor":
-            options = [
-                "⌂  Início",
-                "▦  Marketplace",
-                "▣  Minha loja",
-                "◉  Clientes",
-                "◉  Financeiro",
+            menu_items = [
+                ("⌂", "Início"),
+                ("▦", "Marketplace"),
+                ("▣", "Minha loja"),
+                ("◉", "Clientes"),
+                ("◉", "Financeiro"),
             ]
         else:
-            options = [
-                "⌂  Início",
-                "▦  Marketplace",
-                "▤  Pedidos",
-                "♡  Favoritos",
-                "◇  Minha conta",
+            menu_items = [
+                ("⌂", "Início"),
+                ("▦", "Marketplace"),
+                ("▤", "Pedidos"),
+                ("♡", "Favoritos"),
+                ("◇", "Minha conta"),
             ]
 
-        selected = st.radio(
-            "Navegação",
-            options,
-            label_visibility="collapsed",
-            key=f"menu_{preview}",
-        )
-        page = selected.split("  ", 1)[1]
+        menu_state_key = f"active_menu_{preview}"
+        if menu_state_key not in st.session_state:
+            st.session_state[menu_state_key] = "Início"
+
+        for icon, label in menu_items:
+            active = st.session_state[menu_state_key] == label
+            button_key = f"nav_{preview}_{label}"
+
+            st.markdown(
+                f'<div class="nav-button-wrap {"active" if active else ""}">',
+                unsafe_allow_html=True,
+            )
+            if st.button(
+                f"{icon}  {label}",
+                key=button_key,
+                use_container_width=True,
+            ):
+                st.session_state[menu_state_key] = label
+                st.rerun()
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        page = st.session_state[menu_state_key]
 
         initials = "".join(
             part[0] for part in profile.get("full_name", "AB").split()[:2]
