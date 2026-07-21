@@ -1,18 +1,26 @@
-# Clique&Leve — Streamlit
+# Clique&Leve — versão visual HTML dentro do Streamlit
 
-## Rodar localmente
+Esta versão utiliza o protótipo HTML completo dentro do Streamlit, preservando:
 
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
+- menu lateral premium;
+- cabeçalho de busca;
+- cards;
+- categorias;
+- área do membro;
+- painel do parceiro;
+- painel administrativo;
+- navegação e modais em JavaScript.
 
-## Publicar
+## Publicação
 
-1. Crie um repositório no GitHub.
-2. Envie `app.py`, `requirements.txt` e a pasta `.streamlit`.
-3. No Streamlit Community Cloud, clique em **New app**.
-4. Escolha o repositório e informe `app.py` como arquivo principal.
-5. Clique em **Deploy**.
+Envie para o GitHub:
 
-O protótipo usa dados demonstrativos e `st.session_state`. A próxima fase é conectar Supabase para usuários, produtos, estoque, pedidos, faturas, comissões e repasses.
+- app.py
+- clique_e_leve.html
+- requirements.txt
+
+No Streamlit Community Cloud, selecione `app.py`.
+
+## Observação
+
+Esta versão reproduz o visual do protótipo HTML. Os dados ainda são demonstrativos e não ficam gravados. A etapa seguinte é ligar as ações a Supabase/Python.
