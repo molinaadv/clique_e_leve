@@ -175,6 +175,107 @@ div.stButton>button{border-radius:12px;font-weight:850}
   .hero-main h1{font-size:2rem}
   .category-grid,.partner-wrap,.metric-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ===== CORREÇÃO V7: SELECT E BOTÕES DA SIDEBAR ===== */
+
+/* Caixa "Visualizar como" */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div{
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-radius:12px!important;
+  min-height:42px!important;
+  box-shadow:none!important;
+}
+
+[data-testid="stSidebar"] div[data-baseweb="select"] span,
+[data-testid="stSidebar"] div[data-baseweb="select"] input,
+[data-testid="stSidebar"] div[data-baseweb="select"] svg{
+  color:#ffffff!important;
+  fill:#ffffff!important;
+}
+
+[data-testid="stSidebar"] div[data-baseweb="select"] > div:hover{
+  background:rgba(255,255,255,.13)!important;
+  border-color:rgba(49,211,255,.55)!important;
+}
+
+/* Menu aberto do select */
+div[role="listbox"]{
+  background:#0a2745!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:12px!important;
+}
+div[role="option"]{
+  color:#ffffff!important;
+  background:#0a2745!important;
+}
+div[role="option"]:hover{
+  background:#10446f!important;
+}
+
+/* Botão sair */
+[data-testid="stSidebar"] div.stButton > button{
+  width:100%!important;
+  background:rgba(255,255,255,.08)!important;
+  color:#ffffff!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-radius:12px!important;
+  min-height:42px!important;
+  font-weight:850!important;
+  box-shadow:none!important;
+}
+
+[data-testid="stSidebar"] div.stButton > button:hover{
+  background:rgba(255,255,255,.14)!important;
+  border-color:rgba(49,211,255,.55)!important;
+  color:#ffffff!important;
+}
+
+[data-testid="stSidebar"] div.stButton > button:disabled{
+  background:rgba(255,255,255,.08)!important;
+  color:#ffffff!important;
+  opacity:1!important;
+}
+
+/* Botões principais do hero */
+.hero-buttons{
+  display:flex!important;
+  gap:10px!important;
+  margin-top:20px!important;
+  flex-wrap:wrap!important;
+}
+
+.hero-btn{
+  min-height:44px!important;
+  padding:0 18px!important;
+  border-radius:12px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:.86rem!important;
+  font-weight:900!important;
+  line-height:1!important;
+  box-sizing:border-box!important;
+}
+
+.hero-btn:not(.secondary){
+  background:#ffffff!important;
+  color:#092848!important;
+  border:1px solid #ffffff!important;
+}
+
+.hero-btn.secondary{
+  background:rgba(255,255,255,.10)!important;
+  color:#ffffff!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+}
+
+/* Radio ativo mais próximo do protótipo */
+[data-testid="stSidebar"] .stRadio label:has(input:checked){
+  background:linear-gradient(90deg,rgba(33,211,255,.20),rgba(23,105,255,.18))!important;
+  border-left:3px solid #2bd8ff!important;
+}
+
 </style>
         """,
         unsafe_allow_html=True,
