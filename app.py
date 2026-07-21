@@ -345,51 +345,40 @@ def main() -> None:
         )
 
         if preview == "administrador":
-            menu_items = [
-                ("⌂", "Início"),
-                ("▦", "Marketplace"),
-                ("◎", "Parceiros"),
-                ("▣", "Produtos"),
-                ("◉", "Clientes"),
-                ("◉", "Financeiro"),
-                ("⚙", "Auditoria"),
+            menu_options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "◎  Parceiros",
+                "▣  Produtos",
+                "◉  Clientes",
+                "◉  Financeiro",
+                "⚙  Auditoria",
             ]
         elif preview == "vendedor":
-            menu_items = [
-                ("⌂", "Início"),
-                ("▦", "Marketplace"),
-                ("▣", "Minha loja"),
-                ("◎", "Crédito"),
-                ("◉", "Clientes"),
-                ("◉", "Financeiro"),
+            menu_options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "▣  Minha loja",
+                "◎  Crédito",
+                "◉  Clientes",
+                "◉  Financeiro",
             ]
         else:
-            menu_items = [
-                ("⌂", "Início"),
-                ("▦", "Marketplace"),
-                ("▤", "Pedidos"),
-                ("♡", "Favoritos"),
-                ("◇", "Minha conta"),
+            menu_options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "▤  Pedidos",
+                "♡  Favoritos",
+                "◇  Minha conta",
             ]
 
-        state_key = f"active_menu_{preview}"
-        if state_key not in st.session_state:
-            st.session_state[state_key] = "Início"
-
-        for icon, label in menu_items:
-            active = st.session_state[state_key] == label
-            cls = "nav-active" if active else "nav-idle"
-            st.markdown(f'<div class="{cls}">', unsafe_allow_html=True)
-            if st.button(
-                f"{icon}  {label}",
-                key=f"nav_{preview}_{label}",
-                use_container_width=True,
-            ):
-                st.session_state[state_key] = label
-                st.rerun()
-            st.markdown("</div>", unsafe_allow_html=True)
-
-        page = st.session_state[state_key]
+        selected = st.radio(
+            "Navegação",
+            menu_options,
+            label_visibility="collapsed",
+            key=f"menu_{preview}",
+        )
+        page = selected.split("  ", 1)[1]
 
         initials = "".join(
             part[0] for part in profile.get("full_name", "AB").split()[:2]
