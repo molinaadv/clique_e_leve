@@ -245,55 +245,60 @@ def seller_products_page(seller: dict) -> None:
 
 
 
+
 def login_page() -> None:
-    st.markdown(
-        """
-        <div class="login-shell">
-          <div class="login-card">
-            <section class="login-brand">
+    st.markdown("<div class='login-page-spacer'></div>", unsafe_allow_html=True)
+
+    left, right = st.columns([1.18, 0.88], gap="small", vertical_alignment="stretch")
+
+    with left:
+        html_block(
+            """
+            <section class="login-visual-panel">
               <div>
                 <div class="login-brand-kicker">COMÉRCIO INTERNO + CONFIANÇA</div>
                 <h1>Compre de pessoas próximas. Pague com flexibilidade.</h1>
                 <p>Uma rede privada para vendedores, colaboradores e serviços locais se conectarem com segurança, conveniência e reputação compartilhada.</p>
               </div>
+
               <div class="login-mini-stats">
                 <div class="login-mini-stat"><strong>24</strong><span>parceiros ativos</span></div>
                 <div class="login-mini-stat"><strong>138</strong><span>produtos disponíveis</span></div>
                 <div class="login-mini-stat"><strong>96%</strong><span>pagamentos em dia</span></div>
               </div>
             </section>
-            <section class="login-form-wrap">
-              <div class="login-logo">
-                <div class="login-logo-mark">C&L</div>
-                <div>
-                  <div class="login-logo-title">Clique&Leve</div>
-                  <div class="login-logo-sub">Marketplace interno</div>
+            """
+        )
+
+    with right:
+        with st.container(border=True):
+            html_block(
+                """
+                <div class="login-form-header">
+                  <div class="login-logo">
+                    <div class="login-logo-mark">C&L</div>
+                    <div>
+                      <div class="login-logo-title">Clique&Leve</div>
+                      <div class="login-logo-sub">Marketplace interno</div>
+                    </div>
+                  </div>
+                  <div class="login-form-title">Bem-vindo</div>
+                  <div class="login-form-sub">Entre para acessar sua comunidade.</div>
                 </div>
-              </div>
-              <div class="login-form-title">Bem-vindo</div>
-              <div class="login-form-sub">Entre para acessar sua comunidade.</div>
-            </section>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+                """
+            )
 
-    # Formulário centralizado sobre a coluna direita do card.
-    left, form_col, right = st.columns([1.62, 0.82, 1.12])
-    with form_col:
-        st.markdown("<div style='margin-top:-355px;position:relative;z-index:5'></div>", unsafe_allow_html=True)
-        with st.form("login"):
-            email = st.text_input("E-mail")
-            password = st.text_input("Senha", type="password")
-            submit = st.form_submit_button("Entrar", use_container_width=True)
+            with st.form("login"):
+                email = st.text_input("E-mail")
+                password = st.text_input("Senha", type="password")
+                submit = st.form_submit_button("Entrar", use_container_width=True)
 
-        if submit:
-            try:
-                db.login(email.strip(), password)
-                st.rerun()
-            except Exception as exc:
-                show_error(exc)
+            if submit:
+                try:
+                    db.login(email.strip(), password)
+                    st.rerun()
+                except Exception as exc:
+                    show_error(exc)
 
 
 def main() -> None:
@@ -317,13 +322,18 @@ def main() -> None:
 
         preview = role
         if role == "administrador":
-            html_block('<div class="role-box"><div class="role-box-label">Visualizar como</div>')
-            preview_label = st.selectbox(
-                "Visualizar como",
-                ["Administrador", "Membro", "Vendedor"],
-                label_visibility="collapsed",
-            )
-            html_block("</div>")
+            with st.container(border=True):
+                st.markdown(
+                    '<div class="role-box-label">Visualizar como</div>',
+                    unsafe_allow_html=True,
+                )
+                preview_label = st.selectbox(
+                    "Visualizar como",
+                    ["Administrador", "Membro", "Vendedor"],
+                    label_visibility="collapsed",
+                    key="role_preview",
+                )
+
             preview = {
                 "Administrador": "administrador",
                 "Membro": "cliente",
@@ -333,16 +343,44 @@ def main() -> None:
         html_block('<div class="nav-caption">Navegação</div>')
 
         if preview == "administrador":
-            options = ["⌂ Início", "▦ Marketplace", "◉ Parceiros", "▣ Produtos", "● Clientes", "● Financeiro", "● Auditoria"]
+            options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "◎  Parceiros",
+                "▣  Produtos",
+                "◉  Clientes",
+                "◉  Financeiro",
+                "◉  Auditoria",
+            ]
         elif preview == "vendedor":
-            options = ["⌂ Início", "▦ Marketplace", "▣ Minha loja", "● Clientes", "● Financeiro"]
+            options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "▣  Minha loja",
+                "◉  Clientes",
+                "◉  Financeiro",
+            ]
         else:
-            options = ["⌂ Início", "▦ Marketplace", "▤ Pedidos", "♡ Favoritos", "◇ Minha conta"]
+            options = [
+                "⌂  Início",
+                "▦  Marketplace",
+                "▤  Pedidos",
+                "♡  Favoritos",
+                "◇  Minha conta",
+            ]
 
-        selected = st.radio("Navegação", options, label_visibility="collapsed")
-        page = selected.split(" ", 1)[1]
+        selected = st.radio(
+            "Navegação",
+            options,
+            label_visibility="collapsed",
+            key=f"menu_{preview}",
+        )
+        page = selected.split("  ", 1)[1]
 
-        initials = "".join(part[0] for part in profile.get("full_name", "AB").split()[:2]).upper()
+        initials = "".join(
+            part[0] for part in profile.get("full_name", "AB").split()[:2]
+        ).upper()
+
         html_block(
             f'<div class="sidebar-profile">'
             f'<div class="profile-avatar">{initials}</div>'

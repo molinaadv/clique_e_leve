@@ -498,6 +498,160 @@ div[role="option"][aria-selected="true"]{
   .login-form-wrap{padding:30px 24px}
 }
 
+
+/* =========================================================
+   V9 — LOGIN INTEGRADO + MENU SEM BOLINHAS
+   ========================================================= */
+
+/* LOGIN: duas metades alinhadas, formulário dentro da parte branca */
+.login-page-spacer{height:7vh}
+.login-visual-panel{
+  min-height:520px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    radial-gradient(circle at 94% 0%,rgba(91,190,255,.28),transparent 30%),
+    linear-gradient(135deg,#061d35 0%,#0c477f 54%,#1769ff 100%);
+  color:#fff;
+  border-radius:26px 0 0 26px;
+  padding:44px;
+  box-shadow:0 28px 70px rgba(15,56,104,.15);
+}
+.login-visual-panel h1{
+  color:#fff;
+  font-size:2.55rem;
+  line-height:1.06;
+  margin:18px 0 24px;
+  max-width:620px;
+}
+.login-visual-panel p{
+  color:#dceafa;
+  line-height:1.65;
+  max-width:620px;
+}
+.login-form-header{padding:14px 10px 4px}
+.login-form-title{font-size:1.7rem;font-weight:950;color:#0b1c35;margin-top:22px}
+.login-form-sub{font-size:.86rem;color:#718198;margin:5px 0 18px}
+
+/* O container branco da coluna direita */
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child
+div[data-testid="stVerticalBlockBorderWrapper"]{
+  min-height:520px;
+  background:#fff!important;
+  border:1px solid #dce5f0!important;
+  border-left:0!important;
+  border-radius:0 26px 26px 0!important;
+  padding:34px 26px!important;
+  box-shadow:0 28px 70px rgba(15,56,104,.10);
+}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child
+div[data-testid="stForm"]{
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  background:transparent!important;
+}
+
+/* SIDEBAR: container do Visualizar como */
+[data-testid="stSidebar"] div[data-testid="stVerticalBlockBorderWrapper"]{
+  background:rgba(255,255,255,.07)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:16px!important;
+  padding:12px!important;
+  margin:8px 0 20px!important;
+}
+
+/* Select sempre legível: sobrepõe o seletor global branco */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div{
+  background:#ffffff!important;
+  border:1px solid #ffffff!important;
+  border-radius:11px!important;
+  min-height:44px!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] *,
+[data-testid="stSidebar"] div[data-baseweb="select"] span,
+[data-testid="stSidebar"] div[data-baseweb="select"] div,
+[data-testid="stSidebar"] div[data-baseweb="select"] input{
+  color:#0b1c35!important;
+  -webkit-text-fill-color:#0b1c35!important;
+  opacity:1!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] svg{
+  color:#0b1c35!important;
+  fill:#0b1c35!important;
+}
+
+/* Menu como no HTML: sem bolinhas de radio */
+[data-testid="stSidebar"] .stRadio input[type="radio"],
+[data-testid="stSidebar"] .stRadio [data-testid="stMarkdownContainer"] + div,
+[data-testid="stSidebar"] .stRadio label > div:first-child:not([data-testid="stMarkdownContainer"]){
+  display:none!important;
+}
+[data-testid="stSidebar"] .stRadio label{
+  width:100%!important;
+  min-height:44px!important;
+  display:flex!important;
+  align-items:center!important;
+  padding:0 13px!important;
+  border-radius:12px!important;
+  border-left:3px solid transparent!important;
+  color:#ffffff!important;
+  background:transparent!important;
+  cursor:pointer!important;
+}
+[data-testid="stSidebar"] .stRadio label p{
+  color:#ffffff!important;
+  font-weight:750!important;
+  margin:0!important;
+}
+[data-testid="stSidebar"] .stRadio label:hover{
+  background:rgba(255,255,255,.07)!important;
+}
+[data-testid="stSidebar"] .stRadio label:has(input:checked){
+  background:#0d4669!important;
+  border-left-color:#29d8ff!important;
+}
+[data-testid="stSidebar"] .stRadio label:has(input:checked) p{
+  color:#ffffff!important;
+}
+
+/* Remove qualquer círculo vermelho/branco herdado */
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] svg,
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] [data-baseweb="radio"] > div:first-child{
+  display:none!important;
+}
+
+/* Botão sair igual ao HTML */
+[data-testid="stSidebar"] div.stButton > button{
+  background:transparent!important;
+  color:#ffffff!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  border-radius:11px!important;
+}
+[data-testid="stSidebar"] div.stButton > button:hover{
+  background:rgba(255,255,255,.08)!important;
+  border-color:#29d8ff!important;
+}
+
+@media(max-width:820px){
+  .login-page-spacer{height:2vh}
+  .login-visual-panel{
+    min-height:auto;
+    border-radius:24px 24px 0 0;
+    padding:30px 24px;
+  }
+  .login-visual-panel h1{font-size:2rem}
+  [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child
+  div[data-testid="stVerticalBlockBorderWrapper"]{
+    min-height:auto;
+    border-left:1px solid #dce5f0!important;
+    border-radius:0 0 24px 24px!important;
+    padding:28px 22px!important;
+  }
+}
+
 </style>
         """,
         unsafe_allow_html=True,
