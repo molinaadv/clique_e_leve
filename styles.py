@@ -276,6 +276,228 @@ div[role="option"]:hover{
   border-left:3px solid #2bd8ff!important;
 }
 
+
+/* ===== V8 — LOGIN E MENU FIEIS AO PROTÓTIPO ===== */
+
+/* Sidebar com largura e respiro iguais ao protótipo */
+[data-testid="stSidebar"]{
+  min-width:248px!important;
+  width:248px!important;
+}
+[data-testid="stSidebar"] > div:first-child{
+  padding:18px 14px 14px!important;
+}
+
+/* Bloco Visualizar como */
+.role-box{
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:16px;
+  padding:14px;
+  margin:10px 0 20px;
+}
+.role-box-label{
+  color:#7fb7e8!important;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+/* Select fechado: branco, texto escuro e visível */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div{
+  background:#ffffff!important;
+  border:1px solid rgba(255,255,255,.9)!important;
+  border-radius:11px!important;
+  min-height:44px!important;
+  box-shadow:none!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] span,
+[data-testid="stSidebar"] div[data-baseweb="select"] input{
+  color:#0b1c35!important;
+  -webkit-text-fill-color:#0b1c35!important;
+}
+[data-testid="stSidebar"] div[data-baseweb="select"] svg{
+  color:#0b1c35!important;
+  fill:#0b1c35!important;
+}
+
+/* Dropdown aberto */
+div[role="listbox"]{
+  background:#0a2745!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:12px!important;
+  overflow:hidden!important;
+}
+div[role="option"]{
+  color:#ffffff!important;
+  background:#0a2745!important;
+  min-height:42px!important;
+}
+div[role="option"]:hover,
+div[role="option"][aria-selected="true"]{
+  background:#173d63!important;
+}
+
+/* Navegação */
+.nav-caption{
+  color:#77acd9!important;
+  font-size:.67rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  margin:16px 5px 9px;
+}
+[data-testid="stSidebar"] .stRadio > div{
+  gap:4px!important;
+}
+[data-testid="stSidebar"] .stRadio label{
+  min-height:42px!important;
+  padding:.62rem .72rem!important;
+  border-radius:11px!important;
+  margin:0!important;
+  font-weight:700!important;
+  border-left:3px solid transparent!important;
+}
+[data-testid="stSidebar"] .stRadio label:has(input:checked){
+  background:#0d4669!important;
+  border-left-color:#2bd8ff!important;
+}
+[data-testid="stSidebar"] .stRadio label:hover{
+  background:rgba(255,255,255,.07)!important;
+}
+
+/* Perfil fixado visualmente na base */
+.sidebar-profile{
+  margin-top:26vh;
+  padding-top:15px;
+  border-top:1px solid rgba(255,255,255,.10);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.profile-avatar{
+  width:36px;height:36px;border-radius:11px;
+  background:#1d5d91;display:grid;place-items:center;
+  font-weight:900;color:#fff;
+}
+.profile-name{font-weight:900;color:#fff}
+.profile-role{font-size:.72rem;color:#7fb7e8!important}
+
+/* Sair discreto, sem caixa branca */
+[data-testid="stSidebar"] div.stButton > button{
+  background:transparent!important;
+  color:#ffffff!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:11px!important;
+}
+[data-testid="stSidebar"] div.stButton > button:hover{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(43,216,255,.55)!important;
+}
+
+/* LOGIN DEDICADO — sem hero gigantesco */
+.login-shell{
+  min-height:78vh;
+  display:grid;
+  place-items:center;
+  padding:30px 12px;
+}
+.login-card{
+  width:min(940px,94vw);
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  background:#fff;
+  border:1px solid #dce5f0;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 28px 70px rgba(15,56,104,.16);
+}
+.login-brand{
+  background:
+    radial-gradient(circle at 88% 5%,rgba(74,180,255,.30),transparent 30%),
+    linear-gradient(135deg,#061d35 0%,#0d477f 55%,#1769ff 100%);
+  color:#fff;
+  padding:44px;
+  min-height:480px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.login-brand-kicker{
+  font-size:.72rem;
+  letter-spacing:.15em;
+  color:#8ee9ff;
+  font-weight:950;
+}
+.login-brand h1{
+  color:#fff;
+  font-size:2.55rem;
+  line-height:1.05;
+  margin:18px 0 14px;
+  max-width:520px;
+}
+.login-brand p{
+  color:#dceafa;
+  line-height:1.6;
+  max-width:520px;
+}
+.login-mini-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:28px;
+}
+.login-mini-stat{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  padding:14px;
+}
+.login-mini-stat strong{display:block;font-size:1.25rem}
+.login-mini-stat span{font-size:.7rem;color:#d6e8f8}
+.login-form-wrap{
+  padding:42px 34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:#fff;
+}
+.login-form-title{
+  font-size:1.65rem;
+  font-weight:950;
+  color:#0b1c35;
+  margin-bottom:4px;
+}
+.login-form-sub{
+  color:#718198;
+  font-size:.86rem;
+  margin-bottom:20px;
+}
+.login-logo{
+  display:flex;align-items:center;gap:10px;margin-bottom:26px;
+}
+.login-logo-mark{
+  width:42px;height:42px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#23d5ff,#1769ff);
+  color:#fff;font-weight:950;
+}
+.login-logo-title{font-weight:950;color:#0b1c35}
+.login-logo-sub{font-size:.72rem;color:#718198}
+
+/* Esconde margens excessivas do formulário de login */
+.login-form-wrap + div[data-testid="stForm"]{
+  margin:0!important;
+}
+
+@media(max-width:820px){
+  .login-card{grid-template-columns:1fr}
+  .login-brand{min-height:auto;padding:30px}
+  .login-brand h1{font-size:2rem}
+  .login-mini-stats{grid-template-columns:1fr 1fr 1fr}
+  .login-form-wrap{padding:30px 24px}
+}
+
 </style>
         """,
         unsafe_allow_html=True,

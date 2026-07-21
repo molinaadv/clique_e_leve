@@ -244,18 +244,54 @@ def seller_products_page(seller: dict) -> None:
             st.dataframe(pd.DataFrame(rows),use_container_width=True,hide_index=True)
 
 
+
 def login_page() -> None:
-    c1,c2,c3=st.columns([1,1.05,1])
-    with c2:
-        st.markdown("<div style='height:9vh'></div>",unsafe_allow_html=True)
-        hero()
+    st.markdown(
+        """
+        <div class="login-shell">
+          <div class="login-card">
+            <section class="login-brand">
+              <div>
+                <div class="login-brand-kicker">COMÉRCIO INTERNO + CONFIANÇA</div>
+                <h1>Compre de pessoas próximas. Pague com flexibilidade.</h1>
+                <p>Uma rede privada para vendedores, colaboradores e serviços locais se conectarem com segurança, conveniência e reputação compartilhada.</p>
+              </div>
+              <div class="login-mini-stats">
+                <div class="login-mini-stat"><strong>24</strong><span>parceiros ativos</span></div>
+                <div class="login-mini-stat"><strong>138</strong><span>produtos disponíveis</span></div>
+                <div class="login-mini-stat"><strong>96%</strong><span>pagamentos em dia</span></div>
+              </div>
+            </section>
+            <section class="login-form-wrap">
+              <div class="login-logo">
+                <div class="login-logo-mark">C&L</div>
+                <div>
+                  <div class="login-logo-title">Clique&Leve</div>
+                  <div class="login-logo-sub">Marketplace interno</div>
+                </div>
+              </div>
+              <div class="login-form-title">Bem-vindo</div>
+              <div class="login-form-sub">Entre para acessar sua comunidade.</div>
+            </section>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Formulário centralizado sobre a coluna direita do card.
+    left, form_col, right = st.columns([1.62, 0.82, 1.12])
+    with form_col:
+        st.markdown("<div style='margin-top:-355px;position:relative;z-index:5'></div>", unsafe_allow_html=True)
         with st.form("login"):
-            email=st.text_input("E-mail")
-            password=st.text_input("Senha",type="password")
-            submit=st.form_submit_button("Entrar",use_container_width=True)
+            email = st.text_input("E-mail")
+            password = st.text_input("Senha", type="password")
+            submit = st.form_submit_button("Entrar", use_container_width=True)
+
         if submit:
             try:
-                db.login(email.strip(),password); st.rerun()
+                db.login(email.strip(), password)
+                st.rerun()
             except Exception as exc:
                 show_error(exc)
 
@@ -271,22 +307,53 @@ def main() -> None:
         show_error(exc); return
 
     with st.sidebar:
-        html_block('<div class="brand"><div class="brand-mark">C&L</div><div><div class="brand-title">Clique&Leve</div><div class="brand-sub">Marketplace interno</div></div></div>')
+        html_block(
+            '<div class="brand">'
+            '<div class="brand-mark">C&L</div>'
+            '<div><div class="brand-title">Clique&Leve</div>'
+            '<div class="brand-sub">Marketplace interno</div></div>'
+            '</div>'
+        )
+
         preview = role
-        if role=="administrador":
-            preview_label=st.selectbox("Visualizar como",["Administrador","Membro","Vendedor"])
-            preview={"Administrador":"administrador","Membro":"cliente","Vendedor":"vendedor"}[preview_label]
-        html_block('<div class="side-label">Navegação</div>')
-        if preview=="administrador":
-            options=["Início","Marketplace","Parceiros","Produtos","Clientes","Financeiro","Auditoria"]
-        elif preview=="vendedor":
-            options=["Início","Marketplace","Minha loja","Clientes","Financeiro"]
+        if role == "administrador":
+            html_block('<div class="role-box"><div class="role-box-label">Visualizar como</div>')
+            preview_label = st.selectbox(
+                "Visualizar como",
+                ["Administrador", "Membro", "Vendedor"],
+                label_visibility="collapsed",
+            )
+            html_block("</div>")
+            preview = {
+                "Administrador": "administrador",
+                "Membro": "cliente",
+                "Vendedor": "vendedor",
+            }[preview_label]
+
+        html_block('<div class="nav-caption">Navegação</div>')
+
+        if preview == "administrador":
+            options = ["⌂ Início", "▦ Marketplace", "◉ Parceiros", "▣ Produtos", "● Clientes", "● Financeiro", "● Auditoria"]
+        elif preview == "vendedor":
+            options = ["⌂ Início", "▦ Marketplace", "▣ Minha loja", "● Clientes", "● Financeiro"]
         else:
-            options=["Início","Marketplace","Pedidos","Favoritos","Minha conta"]
-        page=st.radio("Navegação",options,label_visibility="collapsed")
-        html_block(f'<div class="user-block"><div class="user-name">{profile.get("full_name","Usuário")}</div><div class="user-role">{preview.capitalize()}</div></div>')
-        if st.button("Sair",use_container_width=True):
-            db.logout(); st.rerun()
+            options = ["⌂ Início", "▦ Marketplace", "▤ Pedidos", "♡ Favoritos", "◇ Minha conta"]
+
+        selected = st.radio("Navegação", options, label_visibility="collapsed")
+        page = selected.split(" ", 1)[1]
+
+        initials = "".join(part[0] for part in profile.get("full_name", "AB").split()[:2]).upper()
+        html_block(
+            f'<div class="sidebar-profile">'
+            f'<div class="profile-avatar">{initials}</div>'
+            f'<div><div class="profile-name">{profile.get("full_name","Usuário")}</div>'
+            f'<div class="profile-role">{preview.capitalize()}</div></div>'
+            f'</div>'
+        )
+
+        if st.button("Sair", use_container_width=True):
+            db.logout()
+            st.rerun()
 
     if page=="Marketplace":
         marketplace_page()
