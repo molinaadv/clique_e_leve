@@ -246,46 +246,83 @@ def seller_products_page(seller: dict) -> None:
 
 
 
-def login_page() -> None:
-    st.markdown("<div class='login-page-spacer'></div>", unsafe_allow_html=True)
 
-    left, right = st.columns([1.18, 0.88], gap="small", vertical_alignment="top")
+def login_page() -> None:
+    st.markdown("<div style='height:6vh'></div>", unsafe_allow_html=True)
+
+    left, right = st.columns([1.15, 0.85], gap="small")
 
     with left:
-        html_block(
+        st.markdown(
             """
-            <section class="login-visual-panel">
+            <div style="
+                min-height:520px;
+                display:flex;
+                flex-direction:column;
+                justify-content:space-between;
+                padding:44px;
+                border-radius:28px 0 0 28px;
+                color:#ffffff;
+                background:
+                  radial-gradient(circle at 88% 4%,rgba(72,173,255,.28),transparent 30%),
+                  linear-gradient(135deg,#07192d 0%,#0b3f73 52%,#1463ff 100%);
+                box-shadow:0 24px 60px rgba(16,33,58,.14);
+            ">
               <div>
-                <div class="login-brand-kicker">COMÉRCIO INTERNO + CONFIANÇA</div>
-                <h1>Compre de pessoas próximas. Pague com flexibilidade.</h1>
-                <p>Uma rede privada para vendedores, colaboradores e serviços locais se conectarem com segurança, conveniência e reputação compartilhada.</p>
+                <div style="font-size:12px;letter-spacing:.16em;color:#9ddfff;font-weight:900">
+                  COMÉRCIO INTERNO + CONFIANÇA
+                </div>
+                <h1 style="color:#fff;font-size:42px;line-height:1.06;margin:18px 0 22px;letter-spacing:-.04em">
+                  Compre de pessoas próximas. Pague com flexibilidade.
+                </h1>
+                <p style="color:#d8e9fb;font-size:16px;line-height:1.65;max-width:680px">
+                  Uma rede privada para vendedores, colaboradores e serviços locais se conectarem
+                  com segurança, conveniência e reputação compartilhada.
+                </p>
               </div>
 
-              <div class="login-mini-stats">
-                <div class="login-mini-stat"><strong>24</strong><span>parceiros ativos</span></div>
-                <div class="login-mini-stat"><strong>138</strong><span>produtos disponíveis</span></div>
-                <div class="login-mini-stat"><strong>96%</strong><span>pagamentos em dia</span></div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                <div style="background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px">
+                  <strong style="display:block;font-size:24px">24</strong>
+                  <span style="font-size:12px;color:#c7ddf2">parceiros ativos</span>
+                </div>
+                <div style="background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px">
+                  <strong style="display:block;font-size:24px">138</strong>
+                  <span style="font-size:12px;color:#c7ddf2">produtos disponíveis</span>
+                </div>
+                <div style="background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px">
+                  <strong style="display:block;font-size:24px">96%</strong>
+                  <span style="font-size:12px;color:#c7ddf2">pagamentos em dia</span>
+                </div>
               </div>
-            </section>
-            """
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
     with right:
         with st.container(border=True):
-            html_block(
+            st.markdown(
                 """
-                <div class="login-form-header">
-                  <div class="login-logo">
-                    <div class="login-logo-mark">C&L</div>
+                <div style="padding:20px 8px 12px">
+                  <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px">
+                    <div style="
+                      width:44px;height:44px;border-radius:14px;
+                      background:linear-gradient(135deg,#27d6ff,#1463ff);
+                      display:grid;place-items:center;color:#fff;font-weight:900
+                    ">C&L</div>
                     <div>
-                      <div class="login-logo-title">Clique&Leve</div>
-                      <div class="login-logo-sub">Marketplace interno</div>
+                      <div style="font-size:18px;font-weight:900;color:#10213a">Clique&Leve</div>
+                      <div style="font-size:12px;color:#6f7f94">Marketplace interno</div>
                     </div>
                   </div>
-                  <div class="login-form-title">Bem-vindo</div>
-                  <div class="login-form-sub">Entre para acessar sua comunidade.</div>
+                  <div style="font-size:28px;font-weight:900;color:#10213a">Bem-vindo</div>
+                  <div style="font-size:14px;color:#6f7f94;margin:5px 0 20px">
+                    Entre para acessar sua comunidade.
+                  </div>
                 </div>
-                """
+                """,
+                unsafe_allow_html=True,
             )
 
             with st.form("login"):
