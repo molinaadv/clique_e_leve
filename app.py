@@ -322,25 +322,27 @@ def main() -> None:
 
         preview = role
         if role == "administrador":
-            with st.container(border=True):
-                st.markdown(
-                    '<div class="role-box-label">Visualizar como</div>',
-                    unsafe_allow_html=True,
-                )
-                preview_label = st.selectbox(
-                    "Visualizar como",
-                    ["Administrador", "Membro", "Vendedor"],
-                    label_visibility="collapsed",
-                    key="role_preview",
-                )
-
+            st.markdown(
+                '<div class="role-title">VISUALIZAR COMO</div>',
+                unsafe_allow_html=True,
+            )
+            preview_label = st.selectbox(
+                "Visualizar como",
+                ["Administrador", "Membro", "Vendedor"],
+                index=0,
+                label_visibility="collapsed",
+                key="role_preview",
+            )
             preview = {
                 "Administrador": "administrador",
                 "Membro": "cliente",
                 "Vendedor": "vendedor",
             }[preview_label]
 
-        html_block('<div class="nav-caption">Navegação</div>')
+        st.markdown(
+            '<div class="menu-title-clean">NAVEGAÇÃO</div>',
+            unsafe_allow_html=True,
+        )
 
         if preview == "administrador":
             menu_items = [
@@ -350,13 +352,14 @@ def main() -> None:
                 ("▣", "Produtos"),
                 ("◉", "Clientes"),
                 ("◉", "Financeiro"),
-                ("◉", "Auditoria"),
+                ("⚙", "Auditoria"),
             ]
         elif preview == "vendedor":
             menu_items = [
                 ("⌂", "Início"),
                 ("▦", "Marketplace"),
                 ("▣", "Minha loja"),
+                ("◎", "Crédito"),
                 ("◉", "Clientes"),
                 ("◉", "Financeiro"),
             ]
@@ -369,28 +372,24 @@ def main() -> None:
                 ("◇", "Minha conta"),
             ]
 
-        menu_state_key = f"active_menu_{preview}"
-        if menu_state_key not in st.session_state:
-            st.session_state[menu_state_key] = "Início"
+        state_key = f"active_menu_{preview}"
+        if state_key not in st.session_state:
+            st.session_state[state_key] = "Início"
 
         for icon, label in menu_items:
-            active = st.session_state[menu_state_key] == label
-            button_key = f"nav_{preview}_{label}"
-
-            st.markdown(
-                f'<div class="nav-button-wrap {"active" if active else ""}">',
-                unsafe_allow_html=True,
-            )
+            active = st.session_state[state_key] == label
+            cls = "nav-active" if active else "nav-idle"
+            st.markdown(f'<div class="{cls}">', unsafe_allow_html=True)
             if st.button(
                 f"{icon}  {label}",
-                key=button_key,
+                key=f"nav_{preview}_{label}",
                 use_container_width=True,
             ):
-                st.session_state[menu_state_key] = label
+                st.session_state[state_key] = label
                 st.rerun()
             st.markdown("</div>", unsafe_allow_html=True)
 
-        page = st.session_state[menu_state_key]
+        page = st.session_state[state_key]
 
         initials = "".join(
             part[0] for part in profile.get("full_name", "AB").split()[:2]
@@ -404,7 +403,7 @@ def main() -> None:
             f'</div>'
         )
 
-        if st.button("Sair", use_container_width=True):
+        if st.button("Sair", use_container_width=True, key="logout_button"):
             db.logout()
             st.rerun()
 
